@@ -1,9 +1,11 @@
 package br.edu.utfpr.cp.cloudtester.tool;
 
+import java.io.Closeable;
+
 /**
  *
  * @author Douglas
  */
-public interface DBManager extends FeatureManager {
-    
+interface FeatureManager extends Closeable {
+
 }

@@ -3,18 +3,14 @@ package br.edu.utfpr.cp.cloudtester.tool;
 /**
  *
  * @author Douglas
- * @param <STORE>
- * @param <QUEUE>
- * @param <VM>
- * @param <DB>
  */
-public abstract class FeatureManagerFactory<STORE extends StoreManager, QUEUE extends QueueManager, VM extends VMManager, DB extends DBManager> {
+public abstract class FeatureManagerFactory {
 
-    public abstract STORE createStoreManager();
+    public abstract StoreManager createStoreManager();
 
-    public abstract QUEUE createQueueManager();
+    public abstract QueueManager createQueueManager();
 
-    public abstract VM createVMManager();
+    public abstract VMManager createVMManager();
 
-    public abstract DB createDBManager();
+    public abstract DBManager createDBManager();
 }

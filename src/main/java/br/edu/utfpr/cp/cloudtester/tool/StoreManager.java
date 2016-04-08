@@ -1,13 +1,15 @@
 package br.edu.utfpr.cp.cloudtester.tool;
 
+import java.io.IOException;
+
 /**
  *
  * @author Douglas
  */
-public interface StoreManager {
+public interface StoreManager extends FeatureManager {
 
-    public ResourceId stores(ResourceFile file);
+    public ResourceId stores(Resource file) throws IOException;
 
-    public ResourceFile retrieves(ResourceId id);
+    public Resource retrieves(ResourceId id) throws IOException;
 
 }
