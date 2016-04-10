@@ -44,9 +44,8 @@ public class AzureTest {
     public void jcloudUploadTest() throws IOException {
         StoreManager storeManager = factory.createStoreManager();
 
-        Resource file = new ResourceFile("file.txt");
-
         for (int i = 0; i < 10; i++) {
+            Resource file = new ResourceFile("file" + i + ".txt");
             long start = System.currentTimeMillis();
             storeManager.stores(file, CONTAINER_NAME);
             long diff = System.currentTimeMillis() - start;
@@ -62,7 +61,7 @@ public class AzureTest {
 
         for (int i = 0; i < 10; i++) {
             long start = System.currentTimeMillis();
-            Resource resourceByteArray = storeManager.retrieves("file.txt", CONTAINER_NAME);
+            Resource resourceByteArray = storeManager.retrieves("file" + i + ".txt", CONTAINER_NAME);
             long diff = System.currentTimeMillis() - start;
             System.out.println("Downloaded File " + resourceByteArray.getName()
                     + " size " + resourceByteArray.getLength() + " in " + diff + " millis");
@@ -81,7 +80,7 @@ public class AzureTest {
             long diff = System.currentTimeMillis() - start;
             System.out.println("Listed " + result.size() + " files in " + diff + " millis");
         }
-        
+
         Closeables.close(storeManager, true);
     }
 }
