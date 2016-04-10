@@ -43,4 +43,8 @@ public class JCloudFeatureManagerFactory extends FeatureManagerFactory {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " with provider " + provider; //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -9,7 +9,7 @@ import java.io.InputStream;
  *
  * @author Douglas
  */
-class ResourceFile implements Resource {
+public class ResourceFile implements Resource {
 
     private final File file;
 

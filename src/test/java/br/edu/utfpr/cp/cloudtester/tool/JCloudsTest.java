@@ -1,12 +1,12 @@
 package br.edu.utfpr.cp.cloudtester.tool;
 
+import br.edu.utfpr.cp.cloudtester.tool.Handler.StorageTestHandler;
 import br.edu.utfpr.cp.cloudtester.jclouds.JCloudFeatureManagerFactory;
-import com.google.common.io.Closeables;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
 import java.util.Properties;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,6 +18,8 @@ public class JCloudsTest {
 
     public JCloudsTest() {
     }
+
+    private static final int TEST_TIMES = 10;
 
     private static final String PROVIDER_AZURE = "azureblob";
     private static final String PROVIDER_AWS = "aws-s3";
@@ -57,79 +59,17 @@ public class JCloudsTest {
     }
 
     @Test
-    public void azureUploadTest() throws IOException {
-        System.out.println("azureUploadTest");
-        uploadTest(azureFactory, CONTAINER_NAME_AZURE);
-    }
-
-    @Test
-    public void azureDownloadTest() throws IOException {
-        System.out.println("azureDownloadTest");
-        downloadTest(azureFactory, CONTAINER_NAME_AZURE);
-    }
-
-    @Test
-    public void azureListTest() throws IOException {
-        System.out.println("azureListTest");
-        listTest(azureFactory, CONTAINER_NAME_AZURE);
+    public void azureTest() throws IOException {
+        StorageTestHandler.uploadTest(azureFactory, CONTAINER_NAME_AZURE, TEST_TIMES);
+        StorageTestHandler.downloadTest(azureFactory, CONTAINER_NAME_AZURE, TEST_TIMES);
+        StorageTestHandler.listTest(azureFactory, CONTAINER_NAME_AZURE, TEST_TIMES);
     }
 
     @Test
     public void awsUploadTest() throws IOException {
-        System.out.println("awsUploadTest");
-        uploadTest(awsFactory, CONTAINER_NAME_AWS);
+        StorageTestHandler.uploadTest(awsFactory, CONTAINER_NAME_AWS, TEST_TIMES);
+        StorageTestHandler.downloadTest(awsFactory, CONTAINER_NAME_AWS, TEST_TIMES);
+        StorageTestHandler.listTest(awsFactory, CONTAINER_NAME_AWS, TEST_TIMES);
     }
 
-    @Test
-    public void awsDownloadTest() throws IOException {
-        System.out.println("awsDownloadTest");
-        downloadTest(awsFactory, CONTAINER_NAME_AWS);
-    }
-
-    @Test
-    public void awsListTest() throws IOException {
-        System.out.println("awsListTest");
-        listTest(awsFactory, CONTAINER_NAME_AWS);
-    }
-
-    private void uploadTest(FeatureManagerFactory factory, String containerName) throws IOException {
-        StoreManager storeManager = factory.createStoreManager();
-
-        for (int i = 0; i < 10; i++) {
-            Resource file = new ResourceFile("file" + i + ".txt");
-            long start = System.currentTimeMillis();
-            storeManager.stores(file, containerName);
-            long diff = System.currentTimeMillis() - start;
-            System.out.println("Uploaded File " + file.getName() + " in " + diff + " millis");
-        }
-
-        Closeables.close(storeManager, true);
-    }
-
-    private void downloadTest(FeatureManagerFactory factory, String containerName) throws IOException {
-        StoreManager storeManager = factory.createStoreManager();
-
-        for (int i = 0; i < 10; i++) {
-            long start = System.currentTimeMillis();
-            Resource resourceByteArray = storeManager.retrieves("file" + i + ".txt", containerName);
-            long diff = System.currentTimeMillis() - start;
-            System.out.println("Downloaded File " + resourceByteArray.getName()
-                    + " size " + resourceByteArray.getLength() + " in " + diff + " millis");
-        }
-
-        Closeables.close(storeManager, true);
-    }
-
-    private void listTest(FeatureManagerFactory factory, String containerName) throws IOException {
-        StoreManager storeManager = factory.createStoreManager();
-
-        for (int i = 0; i < 10; i++) {
-            long start = System.currentTimeMillis();
-            List<? extends ResourceMetadata> result = storeManager.list(containerName);
-            long diff = System.currentTimeMillis() - start;
-            System.out.println("Listed " + result.size() + " files in " + diff + " millis");
-        }
-
-        Closeables.close(storeManager, true);
-    }
 }
