@@ -7,8 +7,8 @@ package br.edu.utfpr.cp.cloudtester.tool;
  */
 public interface QueueManager<Q extends Queue> extends FeatureManager {
 
-    public ResourceId send(Resource file, Q queue);
+    public ResourceMetadata send(Resource file, Q queue);
 
-    public Resource retrieves(ResourceId id, Q queue);
+    public Resource retrieves(ResourceMetadata id, Q queue);
 
 }

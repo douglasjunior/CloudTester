@@ -3,8 +3,8 @@ package br.edu.utfpr.cp.cloudtester.jclouds;
 import br.edu.utfpr.cp.cloudtester.tool.Queue;
 import br.edu.utfpr.cp.cloudtester.tool.QueueManager;
 import br.edu.utfpr.cp.cloudtester.tool.Resource;
-import br.edu.utfpr.cp.cloudtester.tool.ResourceId;
 import java.io.IOException;
+import br.edu.utfpr.cp.cloudtester.tool.ResourceMetadata;
 
 /**
  *
@@ -13,12 +13,12 @@ import java.io.IOException;
 public class JCloudQueueManager implements QueueManager {
 
     @Override
-    public ResourceId send(Resource file, Queue queue) {
+    public ResourceMetadata send(Resource file, Queue queue) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Resource retrieves(ResourceId id, Queue queue) {
+    public Resource retrieves(ResourceMetadata id, Queue queue) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -13,13 +13,11 @@ public class JCloudFeatureManagerFactory extends FeatureManagerFactory {
     private final String provider;
     private final String identity;
     private final String credential;
-    private final String containerName;
 
-    public JCloudFeatureManagerFactory(String provider, String identity, String credential, String containerName) {
+    public JCloudFeatureManagerFactory(String provider, String identity, String credential) {
         this.provider = provider;
         this.identity = identity;
         this.credential = credential;
-        this.containerName = containerName;
     }
 
     @Override
@@ -27,7 +25,7 @@ public class JCloudFeatureManagerFactory extends FeatureManagerFactory {
         BlobStoreContext context = ContextBuilder.newBuilder(provider)
                 .credentials(identity, credential)
                 .buildView(BlobStoreContext.class);
-        return new JCloudStoreManager(context, containerName);
+        return new JCloudStoreManager(context);
     }
 
     @Override

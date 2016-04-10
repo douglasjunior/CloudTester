@@ -1,6 +1,7 @@
 package br.edu.utfpr.cp.cloudtester.tool;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  *
@@ -8,8 +9,14 @@ import java.io.IOException;
  */
 public interface StoreManager extends FeatureManager {
 
-    public ResourceId stores(Resource file) throws IOException;
+    public void stores(Resource file, String containerName) throws IOException;
 
-    public Resource retrieves(ResourceId id) throws IOException;
+    public Resource retrieves(ResourceMetadata metadata) throws IOException;
+
+    public Resource retrieves(String name, String containerName) throws IOException;
+
+    public ResourceMetadata getResourceMetadata(String name, String containerName);
+
+    public List<? extends ResourceMetadata> list(String containerName);
 
 }
