@@ -14,7 +14,7 @@ import org.junit.*;
  *
  * @author Douglas
  */
-public class JCloudAzureTest {
+public class JCloudAzureComparationTest {
 
     private static final String PROVIDER_AZURE = "azureblob";
 
@@ -44,4 +44,17 @@ public class JCloudAzureTest {
         StoreTestHandler.uploadTest(azureFactory, CONTAINER_NAME_AZURE, 10);
         StoreTestHandler.uploadTest(jcloudFactory, CONTAINER_NAME_AZURE, 10);
     }
+
+    @Test
+    public void downloadComparationTest() throws IOException {
+        StoreTestHandler.downloadTest(azureFactory, CONTAINER_NAME_AZURE, 10);
+        StoreTestHandler.downloadTest(jcloudFactory, CONTAINER_NAME_AZURE, 10);
+    }
+
+    @Test
+    public void listComparationTest() throws IOException {
+        StoreTestHandler.listTest(azureFactory, CONTAINER_NAME_AZURE, 10);
+        StoreTestHandler.listTest(jcloudFactory, CONTAINER_NAME_AZURE, 10);
+    }
+
 }

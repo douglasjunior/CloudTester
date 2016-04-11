@@ -1,15 +1,20 @@
 package br.edu.utfpr.cp.cloudtester.azure;
 
 import br.edu.utfpr.cp.cloudtester.tool.Resource;
+import br.edu.utfpr.cp.cloudtester.tool.ResourceByteArray;
 import br.edu.utfpr.cp.cloudtester.tool.ResourceMetadata;
 import br.edu.utfpr.cp.cloudtester.tool.StoreManager;
 import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.blob.CloudBlobClient;
 import com.microsoft.azure.storage.blob.CloudBlobContainer;
 import com.microsoft.azure.storage.blob.CloudBlockBlob;
+import com.microsoft.azure.storage.blob.ListBlobItem;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -40,22 +45,48 @@ class AzureStoreManager implements StoreManager {
 
     @Override
     public Resource retrieves(ResourceMetadata metadata) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return retrieves(metadata.getName(), metadata.getContainerName());
     }
 
     @Override
     public Resource retrieves(String name, String containerName) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            CloudBlobContainer container = getContainer(containerName);
+            CloudBlockBlob blob = container.getBlockBlobReference(name);
+            try (ByteArrayOutputStream baos = new ByteArrayOutputStream();) {
+                blob.download(baos);
+                return new ResourceByteArray(baos.toByteArray(), name);
+            }
+        } catch (URISyntaxException | StorageException ex) {
+            throw new IOException(ex);
+        }
     }
 
     @Override
     public ResourceMetadata getResourceMetadata(String name, String containerName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            CloudBlobContainer container = getContainer(containerName);
+            CloudBlockBlob blob = container.getBlockBlobReference(name);
+            blob.downloadAttributes();
+            return new AzureResourceMetadata(name, containerName, blob.getProperties(), blob.getUri());
+        } catch (URISyntaxException | StorageException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override
     public List<? extends ResourceMetadata> list(String containerName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            List<AzureResourceMetadata> result = new ArrayList<>();
+            CloudBlobContainer container = getContainer(containerName);
+            for (Iterator<ListBlobItem> iterator = container.listBlobs().iterator(); iterator.hasNext();) {
+                CloudBlockBlob item = (CloudBlockBlob) iterator.next();
+                result.add(new AzureResourceMetadata(item.getName(), containerName, item.getProperties(), item.getUri()));
+            }
+            return result;
+        } catch (URISyntaxException | StorageException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override

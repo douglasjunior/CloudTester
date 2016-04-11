@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public interface ResourceMetadata {
 
-    public String getId();
+    public String getEtag();
 
     public String getName();
 

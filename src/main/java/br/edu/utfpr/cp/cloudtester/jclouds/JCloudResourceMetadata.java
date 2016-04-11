@@ -21,7 +21,7 @@ public class JCloudResourceMetadata implements ResourceMetadata {
     }
 
     @Override
-    public String getId() {
+    public String getEtag() {
         return storageMetadata.getETag();
     }
 

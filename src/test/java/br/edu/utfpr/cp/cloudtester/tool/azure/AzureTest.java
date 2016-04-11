@@ -41,6 +41,8 @@ public class AzureTest {
     @Test
     public void test() throws IOException {
         StoreTestHandler.uploadTest(azureFactory, CONTAINER_NAME_AZURE, 10);
+        StoreTestHandler.downloadTest(azureFactory, CONTAINER_NAME_AZURE, 10);
+        StoreTestHandler.listTest(azureFactory, CONTAINER_NAME_AZURE, 10);
     }
 
 }
