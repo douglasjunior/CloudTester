@@ -30,7 +30,7 @@ Biblioteca de teste e comparação entre APIs de acesso a nuvem.
  CREDENTIAL_AWS = 8+NeuyABHDop7WuIjP1Xs6+7mRZOhauIJgom2vWz #[Secret Access Key criada na seção de Security Credentials]
  CONTAINER_NAME_AWS = cloudtester-utfpr #[nome do Bucket criado no S3]
  ```
- 
+ *Obs: Substitua os valores de exemplo pelos valores de suas credenciais. Não compartilhe suas credenciais com terceiros.*
 2. Para testar Download e Upload é preciso criar os 10 arquivos a serem enviados, também na raiz do projeto.
 
  Exemplo:
