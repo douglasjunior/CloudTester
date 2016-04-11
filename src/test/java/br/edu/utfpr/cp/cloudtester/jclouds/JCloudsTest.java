@@ -1,9 +1,8 @@
-package br.edu.utfpr.cp.cloudtester.tool.jclouds;
+package br.edu.utfpr.cp.cloudtester.jclouds;
 
-import br.edu.utfpr.cp.cloudtester.tool.util.CredentialsLoader;
-import br.edu.utfpr.cp.cloudtester.jclouds.JCloudFeatureManagerFactory;
+import br.edu.utfpr.cp.cloudtester.handler.StoreTestHandler;
+import br.edu.utfpr.cp.cloudtester.util.CredentialsLoader;
 import br.edu.utfpr.cp.cloudtester.tool.FeatureManagerFactory;
-import br.edu.utfpr.cp.cloudtester.tool.handler.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package br.edu.utfpr.cp.cloudtester.tool.handler;
+package br.edu.utfpr.cp.cloudtester.handler;
 
 import br.edu.utfpr.cp.cloudtester.tool.FeatureManagerFactory;
 import br.edu.utfpr.cp.cloudtester.tool.Resource;

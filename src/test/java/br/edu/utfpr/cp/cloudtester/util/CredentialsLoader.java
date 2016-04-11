@@ -1,4 +1,4 @@
-package br.edu.utfpr.cp.cloudtester.tool.util;
+package br.edu.utfpr.cp.cloudtester.util;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

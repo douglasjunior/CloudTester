@@ -1,10 +1,10 @@
-package br.edu.utfpr.cp.cloudtester.tool.comparation;
+package br.edu.utfpr.cp.cloudtester.comparation;
 
 import br.edu.utfpr.cp.cloudtester.azure.AzureFeatureManagerFactory;
 import br.edu.utfpr.cp.cloudtester.jclouds.JCloudFeatureManagerFactory;
 import br.edu.utfpr.cp.cloudtester.tool.FeatureManagerFactory;
-import br.edu.utfpr.cp.cloudtester.tool.handler.StoreTestHandler;
-import br.edu.utfpr.cp.cloudtester.tool.util.CredentialsLoader;
+import br.edu.utfpr.cp.cloudtester.handler.StoreTestHandler;
+import br.edu.utfpr.cp.cloudtester.util.CredentialsLoader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
