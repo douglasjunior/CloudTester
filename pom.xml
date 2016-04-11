@@ -12,6 +12,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <jclouds.version>1.8.0</jclouds.version>
+        <azure-storage.version>1.2.0</azure-storage.version>
     </properties>
     
     <dependencies>
@@ -20,6 +21,13 @@
             <artifactId>jclouds-all</artifactId>
             <version>${jclouds.version}</version>
         </dependency>
+        <!-- AZURE -->
+        <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>azure-storage</artifactId>
+            <version>${azure-storage.version}</version>
+        </dependency>        
+        <!-- TEST -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
