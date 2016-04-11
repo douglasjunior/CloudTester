@@ -20,12 +20,14 @@
             <groupId>org.apache.jclouds</groupId>
             <artifactId>jclouds-all</artifactId>
             <version>${jclouds.version}</version>
+            <scope>provided</scope>
         </dependency>
         <!-- AZURE -->
         <dependency>
             <groupId>com.microsoft.azure</groupId>
             <artifactId>azure-storage</artifactId>
             <version>${azure-storage.version}</version>
+            <scope>provided</scope>
         </dependency>        
         <!-- TEST -->
         <dependency>
