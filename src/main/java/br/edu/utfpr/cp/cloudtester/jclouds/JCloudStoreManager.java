@@ -34,26 +34,28 @@ public class JCloudStoreManager implements StoreManager {
     }
 
     @Override
-    public void stores(Resource file, String containerName) throws IOException {
-        Blob blob = blobStore.blobBuilder(file.getName())
-                .payload(file.getInputStream())
-                .contentLength(file.getLength())
-                .build();
-        blobStore.putBlob(containerName, blob, PutOptions.Builder.multipart());
+    public void stores(Resource resource, String containerName) throws IOException {
+        try (InputStream is = resource.getInputStream()) {
+            Blob blob = blobStore.blobBuilder(resource.getName())
+                    .payload(is)
+                    .contentLength(resource.getLength())
+                    .build();
+            blobStore.putBlob(containerName, blob, PutOptions.Builder.multipart());
+        }
     }
 
     @Override
     public Resource retrieves(String name, String containerName) throws IOException {
         Blob blob = blobStore.getBlob(containerName, name);
+        try (InputStream is = blob.getPayload().openStream();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();) {
 
-        InputStream is = blob.getPayload().openStream();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ByteStreams.copy(is, baos);
 
-        ByteStreams.copy(is, baos);
+            byte[] bytes = baos.toByteArray();
 
-        byte[] file = baos.toByteArray();
-
-        return new ResourceByteArray(file, name);
+            return new ResourceByteArray(bytes, name);
+        }
     }
 
     @Override

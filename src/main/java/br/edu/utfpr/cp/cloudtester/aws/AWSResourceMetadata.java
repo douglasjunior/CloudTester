@@ -1,7 +1,7 @@
-package br.edu.utfpr.cp.cloudtester.azure;
+package br.edu.utfpr.cp.cloudtester.aws;
 
 import br.edu.utfpr.cp.cloudtester.tool.ResourceMetadata;
-import com.microsoft.azure.storage.blob.BlobProperties;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import java.net.URI;
 import java.util.Date;
 
@@ -9,23 +9,23 @@ import java.util.Date;
  *
  * @author Douglas
  */
-class AzureResourceMetadata implements ResourceMetadata {
+class AWSResourceMetadata implements ResourceMetadata {
 
-    private final String name;
+    private final ObjectMetadata objectMetadata;
     private final String containerName;
-    private final BlobProperties properties;
+    private final String name;
     private final URI uri;
 
-    AzureResourceMetadata(String name, String containerName, BlobProperties properties, URI uri) {
+    public AWSResourceMetadata(String name, String containerName, ObjectMetadata objectMetadata, URI uri) {
         this.name = name;
         this.containerName = containerName;
-        this.properties = properties;
+        this.objectMetadata = objectMetadata;
         this.uri = uri;
     }
 
     @Override
     public String getEtag() {
-        return properties.getEtag();
+        return objectMetadata.getETag();
     }
 
     @Override
@@ -45,17 +45,17 @@ class AzureResourceMetadata implements ResourceMetadata {
 
     @Override
     public Date getCreationDate() {
-        throw new UnsupportedOperationException("CreationDate not available");
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public Date getLastModified() {
-        return properties.getLastModified();
+        return objectMetadata.getLastModified();
     }
 
     @Override
     public long getContentLenght() {
-        return properties.getLength();
+        return objectMetadata.getContentLength();
     }
 
 }

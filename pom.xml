@@ -11,8 +11,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <jclouds.version>1.8.0</jclouds.version>
-        <azure-storage.version>1.2.0</azure-storage.version>
+        <jclouds.version>1.9.2</jclouds.version>
+        <azure-storage.version>4.1.0</azure-storage.version>
+        <aws-s3.version>1.10.66</aws-s3.version>
     </properties>
     
     <dependencies>
@@ -23,13 +24,26 @@
             <version>${jclouds.version}</version>
             <scope>provided</scope>
         </dependency>
+        <!-- -->
+        
         <!-- AZURE -->
         <dependency>
             <groupId>com.microsoft.azure</groupId>
             <artifactId>azure-storage</artifactId>
             <version>${azure-storage.version}</version>
             <scope>provided</scope>
-        </dependency>        
+        </dependency>       
+        <!-- -->
+        
+        <!-- AWS -->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+            <version>${aws-s3.version}</version>
+            <scope>provided</scope>
+        </dependency> 
+        <!-- -->
+        
         <!-- TEST -->
         <dependency>
             <groupId>junit</groupId>
@@ -44,4 +58,16 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-sdk-bom</artifactId>
+                <version>${aws-s3.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

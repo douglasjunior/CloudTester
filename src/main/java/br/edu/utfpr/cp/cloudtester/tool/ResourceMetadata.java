@@ -20,4 +20,6 @@ public interface ResourceMetadata {
     public Date getCreationDate();
 
     public Date getLastModified();
+
+    public long getContentLenght();
 }

@@ -75,4 +75,9 @@ public class JCloudResourceMetadata implements ResourceMetadata {
         return true;
     }
 
+    @Override
+    public long getContentLenght() {
+        return storageMetadata.getSize();
+    }
+
 }

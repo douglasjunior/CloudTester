@@ -4,7 +4,8 @@ Biblioteca de teste e comparação entre APIs de acesso a nuvem.
 
 ## APIs disponíveis
 - [jclouds](https://jclouds.apache.org/) 
-- [Azure Storage](https://azure.microsoft.com/pt-br/develop/java//)
+- [Azure Storage](https://azure.microsoft.com/pt-br/develop/java/)
+- [Amazon AWS](https://aws.amazon.com/pt/sdk-for-java/)
 
 ## Plataformas suportadas
 - [Microsoft Azure](https://azure.microsoft.com/pt-br/)

@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface StoreManager extends FeatureManager {
 
-    public void stores(Resource file, String containerName) throws IOException;
+    public void stores(Resource resource, String containerName) throws IOException;
 
     public Resource retrieves(ResourceMetadata metadata) throws IOException;
 

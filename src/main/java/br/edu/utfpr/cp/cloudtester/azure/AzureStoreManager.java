@@ -11,6 +11,7 @@ import com.microsoft.azure.storage.blob.CloudBlockBlob;
 import com.microsoft.azure.storage.blob.ListBlobItem;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,11 +34,11 @@ class AzureStoreManager implements StoreManager {
     }
 
     @Override
-    public void stores(Resource file, String containerName) throws IOException {
-        try {
+    public void stores(Resource resource, String containerName) throws IOException {
+        try(InputStream is = resource.getInputStream();) {
             CloudBlobContainer container = getContainer(containerName);
-            CloudBlockBlob blob = container.getBlockBlobReference(file.getName());
-            blob.upload(file.getInputStream(), file.getLength());
+            CloudBlockBlob blob = container.getBlockBlobReference(resource.getName());
+            blob.upload(is, resource.getLength());
         } catch (URISyntaxException | StorageException ex) {
             throw new IOException(ex);
         }
@@ -67,7 +68,6 @@ class AzureStoreManager implements StoreManager {
         try {
             CloudBlobContainer container = getContainer(containerName);
             CloudBlockBlob blob = container.getBlockBlobReference(name);
-            blob.downloadAttributes();
             return new AzureResourceMetadata(name, containerName, blob.getProperties(), blob.getUri());
         } catch (URISyntaxException | StorageException ex) {
             throw new RuntimeException(ex);
