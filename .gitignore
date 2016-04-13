@@ -1,5 +1,5 @@
-/target
-/nbproject
+target/
+nbproject/
 credentials.properties
 file*.txt
 nbactions.xml
