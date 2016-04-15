@@ -1,5 +1,6 @@
 package br.edu.utfpr.cp.cloudtester.azure;
 
+import br.edu.utfpr.cp.cloudtester.tool.Authentication;
 import br.edu.utfpr.cp.cloudtester.tool.DBManager;
 import br.edu.utfpr.cp.cloudtester.tool.FeatureManagerFactory;
 import br.edu.utfpr.cp.cloudtester.tool.QueueManager;
@@ -16,11 +17,12 @@ public class AzureFeatureManagerFactory extends FeatureManagerFactory {
 
     public final String storageConnectionString;
 
-    public AzureFeatureManagerFactory(String identity, String credential) {
+    public AzureFeatureManagerFactory(Authentication authentication) {
+        super(authentication);
         storageConnectionString
                 = "DefaultEndpointsProtocol=http;"
-                + "AccountName=" + identity + ";"
-                + "AccountKey=" + credential;
+                + "AccountName=" + authentication.getIdentity() + ";"
+                + "AccountKey=" + authentication.getCredential();
     }
 
     @Override

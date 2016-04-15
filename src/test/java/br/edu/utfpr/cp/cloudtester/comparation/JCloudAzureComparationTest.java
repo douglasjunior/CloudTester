@@ -4,6 +4,7 @@ import br.edu.utfpr.cp.cloudtester.azure.AzureFeatureManagerFactory;
 import br.edu.utfpr.cp.cloudtester.jclouds.JCloudFeatureManagerFactory;
 import br.edu.utfpr.cp.cloudtester.tool.FeatureManagerFactory;
 import br.edu.utfpr.cp.cloudtester.handler.StoreTestHandler;
+import br.edu.utfpr.cp.cloudtester.tool.Authentication;
 import br.edu.utfpr.cp.cloudtester.util.CredentialsLoader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -35,8 +36,8 @@ public class JCloudAzureComparationTest {
         CREDENTIAL_AZURE = props.get("CREDENTIAL_AZURE");
         CONTAINER_NAME_AZURE = props.get("CONTAINER_NAME_AZURE");
 
-        azureFactory = new AzureFeatureManagerFactory(IDENTITY_AZURE, CREDENTIAL_AZURE);
-        jcloudFactory = new JCloudFeatureManagerFactory(PROVIDER_AZURE, IDENTITY_AZURE, CREDENTIAL_AZURE);
+        azureFactory = new AzureFeatureManagerFactory(new Authentication(IDENTITY_AZURE, CREDENTIAL_AZURE));
+        jcloudFactory = new JCloudFeatureManagerFactory(new Authentication(IDENTITY_AZURE, CREDENTIAL_AZURE, PROVIDER_AZURE));
     }
 
     @Test

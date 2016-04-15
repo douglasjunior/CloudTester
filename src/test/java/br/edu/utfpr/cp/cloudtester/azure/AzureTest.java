@@ -2,6 +2,7 @@ package br.edu.utfpr.cp.cloudtester.azure;
 
 import br.edu.utfpr.cp.cloudtester.tool.FeatureManagerFactory;
 import br.edu.utfpr.cp.cloudtester.handler.StoreTestHandler;
+import br.edu.utfpr.cp.cloudtester.tool.Authentication;
 import br.edu.utfpr.cp.cloudtester.util.CredentialsLoader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -34,7 +35,7 @@ public class AzureTest {
         CREDENTIAL_AZURE = props.get("CREDENTIAL_AZURE");
         CONTAINER_NAME_AZURE = props.get("CONTAINER_NAME_AZURE");
 
-        azureFactory = new AzureFeatureManagerFactory(IDENTITY_AZURE, CREDENTIAL_AZURE);
+        azureFactory = new AzureFeatureManagerFactory(new Authentication(IDENTITY_AZURE, CREDENTIAL_AZURE));
     }
 
     @Test

@@ -1,6 +1,7 @@
 package br.edu.utfpr.cp.cloudtester.jclouds;
 
 import br.edu.utfpr.cp.cloudtester.handler.StoreTestHandler;
+import br.edu.utfpr.cp.cloudtester.tool.Authentication;
 import br.edu.utfpr.cp.cloudtester.util.CredentialsLoader;
 import br.edu.utfpr.cp.cloudtester.tool.FeatureManagerFactory;
 import java.io.FileNotFoundException;
@@ -44,13 +45,13 @@ public class JCloudsTest {
         CREDENTIAL_AWS = props.get("CREDENTIAL_AWS");
         CONTAINER_NAME_AWS = props.get("CONTAINER_NAME_AWS");
 
-        awsFactory = new JCloudFeatureManagerFactory(PROVIDER_AWS, IDENTITY_AWS, CREDENTIAL_AWS);
+        awsFactory = new JCloudFeatureManagerFactory(new Authentication(IDENTITY_AWS, CREDENTIAL_AWS, PROVIDER_AWS));
 
         IDENTITY_AZURE = props.get("IDENTITY_AZURE");
         CREDENTIAL_AZURE = props.get("CREDENTIAL_AZURE");
         CONTAINER_NAME_AZURE = props.get("CONTAINER_NAME_AZURE");
 
-        azureFactory = new JCloudFeatureManagerFactory(PROVIDER_AZURE, IDENTITY_AZURE, CREDENTIAL_AZURE);
+        azureFactory = new JCloudFeatureManagerFactory(new Authentication(IDENTITY_AZURE, CREDENTIAL_AZURE, PROVIDER_AZURE));
     }
 
     @Test

@@ -1,6 +1,7 @@
 package br.edu.utfpr.cp.cloudtester.aws;
 
 import br.edu.utfpr.cp.cloudtester.handler.StoreTestHandler;
+import br.edu.utfpr.cp.cloudtester.tool.Authentication;
 import br.edu.utfpr.cp.cloudtester.tool.FeatureManagerFactory;
 import br.edu.utfpr.cp.cloudtester.util.CredentialsLoader;
 import java.io.FileNotFoundException;
@@ -33,7 +34,7 @@ public class AWSTest {
         CREDENTIAL_AWS = props.get("CREDENTIAL_AWS");
         CONTAINER_NAME_AWS = props.get("CONTAINER_NAME_AWS");
 
-        awsFactory = new AWSFeatureManagerFactory(IDENTITY_AWS, CREDENTIAL_AWS);
+        awsFactory = new AWSFeatureManagerFactory(new Authentication(IDENTITY_AWS, CREDENTIAL_AWS));
     }
 
     @Test

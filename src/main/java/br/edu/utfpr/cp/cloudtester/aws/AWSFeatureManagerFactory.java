@@ -1,5 +1,6 @@
 package br.edu.utfpr.cp.cloudtester.aws;
 
+import br.edu.utfpr.cp.cloudtester.tool.Authentication;
 import br.edu.utfpr.cp.cloudtester.tool.DBManager;
 import br.edu.utfpr.cp.cloudtester.tool.FeatureManagerFactory;
 import br.edu.utfpr.cp.cloudtester.tool.QueueManager;
@@ -18,8 +19,9 @@ public class AWSFeatureManagerFactory extends FeatureManagerFactory {
 
     private final AWSCredentials credentials;
 
-    public AWSFeatureManagerFactory(String identity, String credential) {
-        credentials = new BasicAWSCredentials(identity, credential);
+    public AWSFeatureManagerFactory(Authentication authentication) {
+        super(authentication);
+        credentials = new BasicAWSCredentials(authentication.getIdentity(), authentication.getCredential());
     }
 
     @Override
@@ -43,4 +45,8 @@ public class AWSFeatureManagerFactory extends FeatureManagerFactory {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
+    }
 }
