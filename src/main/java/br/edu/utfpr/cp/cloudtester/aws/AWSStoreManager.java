@@ -10,7 +10,6 @@ import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
-import com.google.common.io.ByteStreams;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,6 +17,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
@@ -52,7 +52,7 @@ class AWSStoreManager implements StoreManager {
                 InputStream is = s3Object.getObjectContent();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();) {
 
-            ByteStreams.copy(is, baos);
+            IOUtils.copy(is, baos);
 
             byte[] bytes = baos.toByteArray();
 

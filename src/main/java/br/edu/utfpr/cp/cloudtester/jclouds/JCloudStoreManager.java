@@ -3,7 +3,6 @@ package br.edu.utfpr.cp.cloudtester.jclouds;
 import br.edu.utfpr.cp.cloudtester.tool.Resource;
 import br.edu.utfpr.cp.cloudtester.tool.ResourceByteArray;
 import br.edu.utfpr.cp.cloudtester.tool.StoreManager;
-import com.google.common.io.ByteStreams;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,6 +16,7 @@ import org.jclouds.blobstore.domain.StorageMetadata;
 import org.jclouds.blobstore.options.PutOptions;
 import br.edu.utfpr.cp.cloudtester.tool.ResourceMetadata;
 import java.util.ArrayList;
+import org.apache.commons.io.IOUtils;
 import org.jclouds.blobstore.domain.BlobMetadata;
 
 /**
@@ -50,7 +50,7 @@ public class JCloudStoreManager implements StoreManager {
         try (InputStream is = blob.getPayload().openStream();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();) {
 
-            ByteStreams.copy(is, baos);
+            IOUtils.copy(is, baos);
 
             byte[] bytes = baos.toByteArray();
 
