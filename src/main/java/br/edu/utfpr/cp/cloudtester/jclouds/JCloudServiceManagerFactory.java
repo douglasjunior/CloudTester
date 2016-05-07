@@ -1,40 +1,30 @@
-package br.edu.utfpr.cp.cloudtester.azure;
+package br.edu.utfpr.cp.cloudtester.jclouds;
 
 import br.edu.utfpr.cp.cloudtester.tool.Authentication;
 import br.edu.utfpr.cp.cloudtester.tool.DBManager;
-import br.edu.utfpr.cp.cloudtester.tool.FeatureManagerFactory;
+import br.edu.utfpr.cp.cloudtester.tool.ServiceManagerFactory;
 import br.edu.utfpr.cp.cloudtester.tool.QueueManager;
 import br.edu.utfpr.cp.cloudtester.tool.StoreManager;
 import br.edu.utfpr.cp.cloudtester.tool.VMManager;
-import com.microsoft.azure.storage.CloudStorageAccount;
-import com.microsoft.azure.storage.blob.CloudBlobClient;
+import org.jclouds.ContextBuilder;
+import org.jclouds.blobstore.BlobStoreContext;
 
 /**
  *
  * @author Douglas
  */
-public class AzureFeatureManagerFactory extends FeatureManagerFactory {
+public class JCloudServiceManagerFactory extends ServiceManagerFactory {
 
-    public final String storageConnectionString;
-
-    public AzureFeatureManagerFactory(Authentication authentication) {
+    public JCloudServiceManagerFactory(Authentication authentication) {
         super(authentication);
-        storageConnectionString
-                = "DefaultEndpointsProtocol=http;"
-                + "AccountName=" + authentication.getIdentity() + ";"
-                + "AccountKey=" + authentication.getCredential();
     }
 
     @Override
     public StoreManager createStoreManager() {
-        try {
-            CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
-            CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
-
-            return new AzureStoreManager(blobClient);
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
+        BlobStoreContext context = ContextBuilder.newBuilder(authentication.getProvider())
+                .credentials(authentication.getIdentity(), authentication.getCredential())
+                .buildView(BlobStoreContext.class);
+        return new JCloudStoreManager(context);
     }
 
     @Override
@@ -54,6 +44,6 @@ public class AzureFeatureManagerFactory extends FeatureManagerFactory {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName();
+        return getClass().getSimpleName() + " with provider " + authentication.getProvider();
     }
 }

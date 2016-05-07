@@ -1,33 +1,40 @@
-package br.edu.utfpr.cp.cloudtester.aws;
+package br.edu.utfpr.cp.cloudtester.azure;
 
 import br.edu.utfpr.cp.cloudtester.tool.Authentication;
 import br.edu.utfpr.cp.cloudtester.tool.DBManager;
-import br.edu.utfpr.cp.cloudtester.tool.FeatureManagerFactory;
+import br.edu.utfpr.cp.cloudtester.tool.ServiceManagerFactory;
 import br.edu.utfpr.cp.cloudtester.tool.QueueManager;
 import br.edu.utfpr.cp.cloudtester.tool.StoreManager;
 import br.edu.utfpr.cp.cloudtester.tool.VMManager;
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
+import com.microsoft.azure.storage.CloudStorageAccount;
+import com.microsoft.azure.storage.blob.CloudBlobClient;
 
 /**
  *
  * @author Douglas
  */
-public class AWSFeatureManagerFactory extends FeatureManagerFactory {
+public class AzureServiceManagerFactory extends ServiceManagerFactory {
 
-    private final AWSCredentials credentials;
+    public final String storageConnectionString;
 
-    public AWSFeatureManagerFactory(Authentication authentication) {
+    public AzureServiceManagerFactory(Authentication authentication) {
         super(authentication);
-        credentials = new BasicAWSCredentials(authentication.getIdentity(), authentication.getCredential());
+        storageConnectionString
+                = "DefaultEndpointsProtocol=http;"
+                + "AccountName=" + authentication.getIdentity() + ";"
+                + "AccountKey=" + authentication.getCredential();
     }
 
     @Override
     public StoreManager createStoreManager() {
-        AmazonS3 s3Client = new AmazonS3Client(credentials);
-        return new AWSStoreManager(s3Client);
+        try {
+            CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
+            CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
+
+            return new AzureStoreManager(blobClient);
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override

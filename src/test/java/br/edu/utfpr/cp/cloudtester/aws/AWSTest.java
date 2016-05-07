@@ -2,7 +2,7 @@ package br.edu.utfpr.cp.cloudtester.aws;
 
 import br.edu.utfpr.cp.cloudtester.handler.StoreTestHandler;
 import br.edu.utfpr.cp.cloudtester.tool.Authentication;
-import br.edu.utfpr.cp.cloudtester.tool.FeatureManagerFactory;
+import br.edu.utfpr.cp.cloudtester.tool.ServiceManagerFactory;
 import br.edu.utfpr.cp.cloudtester.util.CredentialsLoader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -22,7 +22,7 @@ public class AWSTest {
     private static String CREDENTIAL_AWS;
     private static String CONTAINER_NAME_AWS;
 
-    private static FeatureManagerFactory awsFactory;
+    private static ServiceManagerFactory awsFactory;
 
     @BeforeClass
     public static void loadCredentials() throws FileNotFoundException, IOException {
@@ -34,7 +34,7 @@ public class AWSTest {
         CREDENTIAL_AWS = props.get("CREDENTIAL_AWS");
         CONTAINER_NAME_AWS = props.get("CONTAINER_NAME_AWS");
 
-        awsFactory = new AWSFeatureManagerFactory(new Authentication(IDENTITY_AWS, CREDENTIAL_AWS));
+        awsFactory = new AWSServiceManagerFactory(new Authentication(IDENTITY_AWS, CREDENTIAL_AWS));
     }
 
     @Test

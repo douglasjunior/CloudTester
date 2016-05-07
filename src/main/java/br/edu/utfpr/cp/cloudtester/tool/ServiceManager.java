@@ -6,6 +6,6 @@ import java.io.Closeable;
  *
  * @author Douglas
  */
-interface FeatureManager extends Closeable {
+interface ServiceManager extends Closeable {
 
 }

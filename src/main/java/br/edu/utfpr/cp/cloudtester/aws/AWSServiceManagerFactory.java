@@ -1,30 +1,33 @@
-package br.edu.utfpr.cp.cloudtester.jclouds;
+package br.edu.utfpr.cp.cloudtester.aws;
 
 import br.edu.utfpr.cp.cloudtester.tool.Authentication;
 import br.edu.utfpr.cp.cloudtester.tool.DBManager;
-import br.edu.utfpr.cp.cloudtester.tool.FeatureManagerFactory;
+import br.edu.utfpr.cp.cloudtester.tool.ServiceManagerFactory;
 import br.edu.utfpr.cp.cloudtester.tool.QueueManager;
 import br.edu.utfpr.cp.cloudtester.tool.StoreManager;
 import br.edu.utfpr.cp.cloudtester.tool.VMManager;
-import org.jclouds.ContextBuilder;
-import org.jclouds.blobstore.BlobStoreContext;
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
 
 /**
  *
  * @author Douglas
  */
-public class JCloudFeatureManagerFactory extends FeatureManagerFactory {
+public class AWSServiceManagerFactory extends ServiceManagerFactory {
 
-    public JCloudFeatureManagerFactory(Authentication authentication) {
+    private final AWSCredentials credentials;
+
+    public AWSServiceManagerFactory(Authentication authentication) {
         super(authentication);
+        credentials = new BasicAWSCredentials(authentication.getIdentity(), authentication.getCredential());
     }
 
     @Override
     public StoreManager createStoreManager() {
-        BlobStoreContext context = ContextBuilder.newBuilder(authentication.getProvider())
-                .credentials(authentication.getIdentity(), authentication.getCredential())
-                .buildView(BlobStoreContext.class);
-        return new JCloudStoreManager(context);
+        AmazonS3 s3Client = new AmazonS3Client(credentials);
+        return new AWSStoreManager(s3Client);
     }
 
     @Override
@@ -44,6 +47,6 @@ public class JCloudFeatureManagerFactory extends FeatureManagerFactory {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + " with provider " + authentication.getProvider();
+        return getClass().getSimpleName();
     }
 }

@@ -4,11 +4,11 @@ package br.edu.utfpr.cp.cloudtester.tool;
  *
  * @author Douglas
  */
-public abstract class FeatureManagerFactory {
+public abstract class ServiceManagerFactory {
 
     protected final Authentication authentication;
 
-    public FeatureManagerFactory(Authentication authentication) {
+    public ServiceManagerFactory(Authentication authentication) {
         this.authentication = authentication;
     }
 

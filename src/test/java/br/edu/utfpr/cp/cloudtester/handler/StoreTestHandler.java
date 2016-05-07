@@ -1,6 +1,6 @@
 package br.edu.utfpr.cp.cloudtester.handler;
 
-import br.edu.utfpr.cp.cloudtester.tool.FeatureManagerFactory;
+import br.edu.utfpr.cp.cloudtester.tool.ServiceManagerFactory;
 import br.edu.utfpr.cp.cloudtester.tool.Resource;
 import br.edu.utfpr.cp.cloudtester.tool.ResourceFile;
 import br.edu.utfpr.cp.cloudtester.tool.ResourceMetadata;
@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class StoreTestHandler {
 
-    public static void uploadTest(final FeatureManagerFactory factory, final String containerName, final int testTimes) throws IOException {
+    public static void uploadTest(final ServiceManagerFactory factory, final String containerName, final int testTimes) throws IOException {
         System.out.println("Testing Upload in " + factory);
 
         StoreManager storeManager = factory.createStoreManager();
@@ -31,7 +31,7 @@ public class StoreTestHandler {
         Closeables.close(storeManager, true);
     }
 
-    public static void downloadTest(final FeatureManagerFactory factory, final String containerName, final int testTimes) throws IOException {
+    public static void downloadTest(final ServiceManagerFactory factory, final String containerName, final int testTimes) throws IOException {
         System.out.println("Testing Download in " + factory);
 
         StoreManager storeManager = factory.createStoreManager();
@@ -47,7 +47,7 @@ public class StoreTestHandler {
         Closeables.close(storeManager, true);
     }
 
-    public static void listTest(final FeatureManagerFactory factory, final String containerName, final int testTimes) throws IOException {
+    public static void listTest(final ServiceManagerFactory factory, final String containerName, final int testTimes) throws IOException {
         System.out.println("Testing List Files in " + factory);
 
         StoreManager storeManager = factory.createStoreManager();
