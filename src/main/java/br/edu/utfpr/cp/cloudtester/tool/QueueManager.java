@@ -1,5 +1,7 @@
 package br.edu.utfpr.cp.cloudtester.tool;
 
+import java.util.List;
+
 /**
  *
  * @author Douglas
@@ -7,8 +9,8 @@ package br.edu.utfpr.cp.cloudtester.tool;
  */
 public interface QueueManager<Q extends Queue> extends ServiceManager {
 
-    public ResourceMetadata send(Resource file, Q queue);
+    public Queue retrieveQueue(String name);
 
-    public Resource retrieves(ResourceMetadata id, Q queue);
+    public List<Queue> listQueues();
 
 }

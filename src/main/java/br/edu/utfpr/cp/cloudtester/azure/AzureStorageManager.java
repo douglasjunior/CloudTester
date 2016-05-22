@@ -3,7 +3,6 @@ package br.edu.utfpr.cp.cloudtester.azure;
 import br.edu.utfpr.cp.cloudtester.tool.Resource;
 import br.edu.utfpr.cp.cloudtester.tool.ResourceByteArray;
 import br.edu.utfpr.cp.cloudtester.tool.ResourceMetadata;
-import br.edu.utfpr.cp.cloudtester.tool.StoreManager;
 import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.blob.CloudBlobClient;
 import com.microsoft.azure.storage.blob.CloudBlobContainer;
@@ -18,18 +17,19 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import br.edu.utfpr.cp.cloudtester.tool.StorageManager;
 
 /**
  *
  * @author Douglas
  */
-class AzureStoreManager implements StoreManager {
+class AzureStorageManager implements StorageManager {
 
     private final Map<String, CloudBlobContainer> cacheContainer = new HashMap<>();
 
     private final CloudBlobClient blobClient;
 
-    public AzureStoreManager(CloudBlobClient blobClient) {
+    public AzureStorageManager(CloudBlobClient blobClient) {
         this.blobClient = blobClient;
     }
 

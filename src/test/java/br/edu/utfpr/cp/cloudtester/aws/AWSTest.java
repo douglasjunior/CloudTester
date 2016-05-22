@@ -1,6 +1,6 @@
 package br.edu.utfpr.cp.cloudtester.aws;
 
-import br.edu.utfpr.cp.cloudtester.handler.StoreTestHandler;
+import br.edu.utfpr.cp.cloudtester.handler.StorageTestHandler;
 import br.edu.utfpr.cp.cloudtester.tool.Authentication;
 import br.edu.utfpr.cp.cloudtester.tool.ServiceManagerFactory;
 import br.edu.utfpr.cp.cloudtester.util.CredentialsLoader;
@@ -39,9 +39,9 @@ public class AWSTest {
 
     @Test
     public void test() throws IOException {
-        StoreTestHandler.uploadTest(awsFactory, CONTAINER_NAME_AWS, 10);
-        StoreTestHandler.downloadTest(awsFactory, CONTAINER_NAME_AWS, 10);
-        StoreTestHandler.listTest(awsFactory, CONTAINER_NAME_AWS, 10);
+        StorageTestHandler.uploadTest(awsFactory, CONTAINER_NAME_AWS, 10);
+        StorageTestHandler.downloadTest(awsFactory, CONTAINER_NAME_AWS, 10);
+        StorageTestHandler.listTest(awsFactory, CONTAINER_NAME_AWS, 10);
     }
 
 }

@@ -3,7 +3,7 @@ package br.edu.utfpr.cp.cloudtester.comparation;
 import br.edu.utfpr.cp.cloudtester.azure.AzureServiceManagerFactory;
 import br.edu.utfpr.cp.cloudtester.jclouds.JCloudServiceManagerFactory;
 import br.edu.utfpr.cp.cloudtester.tool.ServiceManagerFactory;
-import br.edu.utfpr.cp.cloudtester.handler.StoreTestHandler;
+import br.edu.utfpr.cp.cloudtester.handler.StorageTestHandler;
 import br.edu.utfpr.cp.cloudtester.tool.Authentication;
 import br.edu.utfpr.cp.cloudtester.util.CredentialsLoader;
 import java.io.FileNotFoundException;
@@ -42,20 +42,20 @@ public class JCloudAzureComparationTest {
 
     @Test
     public void uploadComparationTest() throws IOException {
-        StoreTestHandler.uploadTest(azureFactory, CONTAINER_NAME_AZURE, 10);
-        StoreTestHandler.uploadTest(jcloudFactory, CONTAINER_NAME_AZURE, 10);
+        StorageTestHandler.uploadTest(azureFactory, CONTAINER_NAME_AZURE, 10);
+        StorageTestHandler.uploadTest(jcloudFactory, CONTAINER_NAME_AZURE, 10);
     }
 
     @Test
     public void downloadComparationTest() throws IOException {
-        StoreTestHandler.downloadTest(azureFactory, CONTAINER_NAME_AZURE, 10);
-        StoreTestHandler.downloadTest(jcloudFactory, CONTAINER_NAME_AZURE, 10);
+        StorageTestHandler.downloadTest(azureFactory, CONTAINER_NAME_AZURE, 10);
+        StorageTestHandler.downloadTest(jcloudFactory, CONTAINER_NAME_AZURE, 10);
     }
 
     @Test
     public void listComparationTest() throws IOException {
-        StoreTestHandler.listTest(azureFactory, CONTAINER_NAME_AZURE, 10);
-        StoreTestHandler.listTest(jcloudFactory, CONTAINER_NAME_AZURE, 10);
+        StorageTestHandler.listTest(azureFactory, CONTAINER_NAME_AZURE, 10);
+        StorageTestHandler.listTest(jcloudFactory, CONTAINER_NAME_AZURE, 10);
     }
 
 }

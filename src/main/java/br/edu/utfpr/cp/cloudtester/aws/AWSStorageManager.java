@@ -3,7 +3,6 @@ package br.edu.utfpr.cp.cloudtester.aws;
 import br.edu.utfpr.cp.cloudtester.tool.Resource;
 import br.edu.utfpr.cp.cloudtester.tool.ResourceByteArray;
 import br.edu.utfpr.cp.cloudtester.tool.ResourceMetadata;
-import br.edu.utfpr.cp.cloudtester.tool.StoreManager;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectListing;
@@ -18,16 +17,17 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.io.IOUtils;
+import br.edu.utfpr.cp.cloudtester.tool.StorageManager;
 
 /**
  *
  * @author Douglas
  */
-class AWSStoreManager implements StoreManager {
+class AWSStorageManager implements StorageManager {
 
     private final AmazonS3 s3Client;
 
-    public AWSStoreManager(AmazonS3 s3Client) {
+    public AWSStorageManager(AmazonS3 s3Client) {
         this.s3Client = s3Client;
     }
 

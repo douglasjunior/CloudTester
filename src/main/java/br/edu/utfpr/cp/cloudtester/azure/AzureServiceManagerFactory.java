@@ -4,10 +4,13 @@ import br.edu.utfpr.cp.cloudtester.tool.Authentication;
 import br.edu.utfpr.cp.cloudtester.tool.DBManager;
 import br.edu.utfpr.cp.cloudtester.tool.ServiceManagerFactory;
 import br.edu.utfpr.cp.cloudtester.tool.QueueManager;
-import br.edu.utfpr.cp.cloudtester.tool.StoreManager;
 import br.edu.utfpr.cp.cloudtester.tool.VMManager;
 import com.microsoft.azure.storage.CloudStorageAccount;
 import com.microsoft.azure.storage.blob.CloudBlobClient;
+import com.microsoft.azure.storage.queue.CloudQueueClient;
+import java.net.URISyntaxException;
+import java.security.InvalidKeyException;
+import br.edu.utfpr.cp.cloudtester.tool.StorageManager;
 
 /**
  *
@@ -20,26 +23,33 @@ public class AzureServiceManagerFactory extends ServiceManagerFactory {
     public AzureServiceManagerFactory(Authentication authentication) {
         super(authentication);
         storageConnectionString
-                = "DefaultEndpointsProtocol=http;"
+                = "DefaultEndpointsProtocol=https;"
                 + "AccountName=" + authentication.getIdentity() + ";"
                 + "AccountKey=" + authentication.getCredential();
     }
 
     @Override
-    public StoreManager createStoreManager() {
+    public StorageManager createStorageManager() {
         try {
             CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
             CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 
-            return new AzureStoreManager(blobClient);
-        } catch (Exception ex) {
+            return new AzureStorageManager(blobClient);
+        } catch (URISyntaxException | InvalidKeyException ex) {
             throw new RuntimeException(ex);
         }
     }
 
     @Override
     public QueueManager createQueueManager() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
+            CloudQueueClient queueClient = storageAccount.createCloudQueueClient();
+
+            return new AzureQueueManager(queueClient);
+        } catch (URISyntaxException | InvalidKeyException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override

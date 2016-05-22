@@ -4,10 +4,10 @@ import br.edu.utfpr.cp.cloudtester.tool.Authentication;
 import br.edu.utfpr.cp.cloudtester.tool.DBManager;
 import br.edu.utfpr.cp.cloudtester.tool.ServiceManagerFactory;
 import br.edu.utfpr.cp.cloudtester.tool.QueueManager;
-import br.edu.utfpr.cp.cloudtester.tool.StoreManager;
 import br.edu.utfpr.cp.cloudtester.tool.VMManager;
 import org.jclouds.ContextBuilder;
 import org.jclouds.blobstore.BlobStoreContext;
+import br.edu.utfpr.cp.cloudtester.tool.StorageManager;
 
 /**
  *
@@ -20,11 +20,11 @@ public class JCloudServiceManagerFactory extends ServiceManagerFactory {
     }
 
     @Override
-    public StoreManager createStoreManager() {
+    public StorageManager createStorageManager() {
         BlobStoreContext context = ContextBuilder.newBuilder(authentication.getProvider())
                 .credentials(authentication.getIdentity(), authentication.getCredential())
                 .buildView(BlobStoreContext.class);
-        return new JCloudStoreManager(context);
+        return new JCloudStorageManager(context);
     }
 
     @Override

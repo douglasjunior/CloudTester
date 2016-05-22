@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author Douglas
  */
-public interface StoreManager extends ServiceManager {
+public interface StorageManager extends ServiceManager {
 
     public void stores(Resource resource, String containerName) throws IOException;
 

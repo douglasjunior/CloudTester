@@ -12,7 +12,7 @@ public abstract class ServiceManagerFactory {
         this.authentication = authentication;
     }
 
-    public abstract StoreManager createStoreManager();
+    public abstract StorageManager createStorageManager();
 
     public abstract QueueManager createQueueManager();
 

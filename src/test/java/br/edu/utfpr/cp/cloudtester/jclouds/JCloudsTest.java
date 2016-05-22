@@ -1,6 +1,6 @@
 package br.edu.utfpr.cp.cloudtester.jclouds;
 
-import br.edu.utfpr.cp.cloudtester.handler.StoreTestHandler;
+import br.edu.utfpr.cp.cloudtester.handler.StorageTestHandler;
 import br.edu.utfpr.cp.cloudtester.tool.Authentication;
 import br.edu.utfpr.cp.cloudtester.util.CredentialsLoader;
 import br.edu.utfpr.cp.cloudtester.tool.ServiceManagerFactory;
@@ -56,16 +56,16 @@ public class JCloudsTest {
 
     @Test
     public void azureTest() throws IOException {
-        StoreTestHandler.uploadTest(azureFactory, CONTAINER_NAME_AZURE, TEST_TIMES);
-        StoreTestHandler.downloadTest(azureFactory, CONTAINER_NAME_AZURE, TEST_TIMES);
-        StoreTestHandler.listTest(azureFactory, CONTAINER_NAME_AZURE, TEST_TIMES);
+        StorageTestHandler.uploadTest(azureFactory, CONTAINER_NAME_AZURE, TEST_TIMES);
+        StorageTestHandler.downloadTest(azureFactory, CONTAINER_NAME_AZURE, TEST_TIMES);
+        StorageTestHandler.listTest(azureFactory, CONTAINER_NAME_AZURE, TEST_TIMES);
     }
 
     @Test
     public void awsUploadTest() throws IOException {
-        StoreTestHandler.uploadTest(awsFactory, CONTAINER_NAME_AWS, TEST_TIMES);
-        StoreTestHandler.downloadTest(awsFactory, CONTAINER_NAME_AWS, TEST_TIMES);
-        StoreTestHandler.listTest(awsFactory, CONTAINER_NAME_AWS, TEST_TIMES);
+        StorageTestHandler.uploadTest(awsFactory, CONTAINER_NAME_AWS, TEST_TIMES);
+        StorageTestHandler.downloadTest(awsFactory, CONTAINER_NAME_AWS, TEST_TIMES);
+        StorageTestHandler.listTest(awsFactory, CONTAINER_NAME_AWS, TEST_TIMES);
     }
 
 }

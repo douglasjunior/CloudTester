@@ -2,7 +2,6 @@ package br.edu.utfpr.cp.cloudtester.jclouds;
 
 import br.edu.utfpr.cp.cloudtester.tool.Resource;
 import br.edu.utfpr.cp.cloudtester.tool.ResourceByteArray;
-import br.edu.utfpr.cp.cloudtester.tool.StoreManager;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,17 +17,18 @@ import br.edu.utfpr.cp.cloudtester.tool.ResourceMetadata;
 import java.util.ArrayList;
 import org.apache.commons.io.IOUtils;
 import org.jclouds.blobstore.domain.BlobMetadata;
+import br.edu.utfpr.cp.cloudtester.tool.StorageManager;
 
 /**
  *
  * @author Douglas
  */
-public class JCloudStoreManager implements StoreManager {
+public class JCloudStorageManager implements StorageManager {
 
     private final BlobStoreContext context;
     private final BlobStore blobStore;
 
-    JCloudStoreManager(BlobStoreContext context) {
+    JCloudStorageManager(BlobStoreContext context) {
         this.context = context;
         this.blobStore = context.getBlobStore();
     }
