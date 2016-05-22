@@ -12,8 +12,8 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <jclouds.version>1.9.2</jclouds.version>
-        <azure-storage.version>4.1.0</azure-storage.version>
-        <aws-s3.version>1.10.66</aws-s3.version>
+        <azure-storage.version>4.2.0</azure-storage.version>
+        <aws.version>1.11.3</aws.version>
     </properties>
     
     <dependencies>
@@ -39,7 +39,13 @@
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-s3</artifactId>
-            <version>${aws-s3.version}</version>
+            <version>${aws.version}</version>
+            <scope>provided</scope>
+        </dependency> 
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-sqs</artifactId>
+            <version>${aws.version}</version>
             <scope>provided</scope>
         </dependency> 
         <!-- -->
@@ -74,7 +80,7 @@
             <dependency>
                 <groupId>com.amazonaws</groupId>
                 <artifactId>aws-java-sdk-bom</artifactId>
-                <version>${aws-s3.version}</version>
+                <version>${aws.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

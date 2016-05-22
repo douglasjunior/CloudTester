@@ -20,8 +20,8 @@ public class AzureServiceManagerFactory extends ServiceManagerFactory {
 
     public final String storageConnectionString;
 
-    public AzureServiceManagerFactory(Authentication authentication) {
-        super(authentication);
+    public AzureServiceManagerFactory(Authentication authentication, String region) {
+        super(authentication, region);
         storageConnectionString
                 = "DefaultEndpointsProtocol=https;"
                 + "AccountName=" + authentication.getIdentity() + ";"

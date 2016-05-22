@@ -26,9 +26,9 @@ public class AzureQueue implements Queue {
     }
 
     @Override
-    public void createIfNotExists() {
+    public void create() {
         try {
-            cloudQueue.createIfNotExists();
+            cloudQueue.create();
         } catch (StorageException ex) {
             throw new RuntimeException(ex);
         }
@@ -44,9 +44,9 @@ public class AzureQueue implements Queue {
     }
 
     @Override
-    public void deleteIfExists() {
+    public void delete() {
         try {
-            cloudQueue.deleteIfExists();
+            cloudQueue.delete();
         } catch (StorageException ex) {
             throw new RuntimeException(ex);
         }

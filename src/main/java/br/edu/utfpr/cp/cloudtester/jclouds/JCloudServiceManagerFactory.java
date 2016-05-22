@@ -8,6 +8,7 @@ import br.edu.utfpr.cp.cloudtester.tool.VMManager;
 import org.jclouds.ContextBuilder;
 import org.jclouds.blobstore.BlobStoreContext;
 import br.edu.utfpr.cp.cloudtester.tool.StorageManager;
+import org.jclouds.aws.domain.Region;
 
 /**
  *
@@ -15,8 +16,8 @@ import br.edu.utfpr.cp.cloudtester.tool.StorageManager;
  */
 public class JCloudServiceManagerFactory extends ServiceManagerFactory {
 
-    public JCloudServiceManagerFactory(Authentication authentication) {
-        super(authentication);
+    public JCloudServiceManagerFactory(Authentication authentication, String region) {
+        super(authentication, region);
     }
 
     @Override

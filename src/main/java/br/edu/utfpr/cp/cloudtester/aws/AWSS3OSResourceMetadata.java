@@ -9,12 +9,12 @@ import java.util.Date;
  *
  * @author Douglas
  */
-class S3OSResourceMetadata implements ResourceMetadata {
+class AWSS3OSResourceMetadata implements ResourceMetadata {
 
     private final String containerName;
     private final S3ObjectSummary objectSummary;
 
-    public S3OSResourceMetadata(String containerName, S3ObjectSummary objectSummary) {
+    public AWSS3OSResourceMetadata(String containerName, S3ObjectSummary objectSummary) {
         this.containerName = containerName;
         this.objectSummary = objectSummary;
     }

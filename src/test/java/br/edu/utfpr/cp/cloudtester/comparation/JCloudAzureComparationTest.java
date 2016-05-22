@@ -36,8 +36,8 @@ public class JCloudAzureComparationTest {
         CREDENTIAL_AZURE = props.get("CREDENTIAL_AZURE");
         CONTAINER_NAME_AZURE = props.get("CONTAINER_NAME_AZURE");
 
-        azureFactory = new AzureServiceManagerFactory(new Authentication(IDENTITY_AZURE, CREDENTIAL_AZURE));
-        jcloudFactory = new JCloudServiceManagerFactory(new Authentication(IDENTITY_AZURE, CREDENTIAL_AZURE, PROVIDER_AZURE));
+        azureFactory = new AzureServiceManagerFactory(new Authentication(IDENTITY_AZURE, CREDENTIAL_AZURE), "");
+        jcloudFactory = new JCloudServiceManagerFactory(new Authentication(IDENTITY_AZURE, CREDENTIAL_AZURE, PROVIDER_AZURE), "");
     }
 
     @Test

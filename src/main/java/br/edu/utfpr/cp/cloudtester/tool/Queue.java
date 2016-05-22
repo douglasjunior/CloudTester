@@ -10,9 +10,9 @@ public interface Queue {
 
     public String getName();
 
-    public void createIfNotExists();
+    public void create();
 
-    public void deleteIfExists();
+    public void delete();
 
     public void clear();
 

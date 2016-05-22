@@ -30,6 +30,7 @@ public class JCloudsTest {
     private static String IDENTITY_AWS;
     private static String CREDENTIAL_AWS;
     private static String CONTAINER_NAME_AWS;
+    private static String REGION_AWS;
 
     private static ServiceManagerFactory azureFactory;
 
@@ -44,14 +45,15 @@ public class JCloudsTest {
         IDENTITY_AWS = props.get("IDENTITY_AWS");
         CREDENTIAL_AWS = props.get("CREDENTIAL_AWS");
         CONTAINER_NAME_AWS = props.get("CONTAINER_NAME_AWS");
+        REGION_AWS = props.get("REGION_AWS");
 
-        awsFactory = new JCloudServiceManagerFactory(new Authentication(IDENTITY_AWS, CREDENTIAL_AWS, PROVIDER_AWS));
+        awsFactory = new JCloudServiceManagerFactory(new Authentication(IDENTITY_AWS, CREDENTIAL_AWS, PROVIDER_AWS), REGION_AWS);
 
         IDENTITY_AZURE = props.get("IDENTITY_AZURE");
         CREDENTIAL_AZURE = props.get("CREDENTIAL_AZURE");
         CONTAINER_NAME_AZURE = props.get("CONTAINER_NAME_AZURE");
 
-        azureFactory = new JCloudServiceManagerFactory(new Authentication(IDENTITY_AZURE, CREDENTIAL_AZURE, PROVIDER_AZURE));
+        azureFactory = new JCloudServiceManagerFactory(new Authentication(IDENTITY_AZURE, CREDENTIAL_AZURE, PROVIDER_AZURE), "");
     }
 
     @Test

@@ -76,7 +76,7 @@ class AWSStorageManager implements StorageManager {
         ObjectListing list = s3Client.listObjects(containerName);
         List<ResourceMetadata> result = new ArrayList<>();
         for (S3ObjectSummary os : list.getObjectSummaries()) {
-            result.add(new S3OSResourceMetadata(containerName, os));
+            result.add(new AWSS3OSResourceMetadata(containerName, os));
         }
         return result;
     }
