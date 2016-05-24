@@ -1,5 +1,6 @@
 package br.edu.utfpr.cp.cloudtester.jclouds;
 
+import br.edu.utfpr.cp.cloudtester.handler.QueueTestHandler;
 import br.edu.utfpr.cp.cloudtester.handler.StorageTestHandler;
 import br.edu.utfpr.cp.cloudtester.tool.Authentication;
 import br.edu.utfpr.cp.cloudtester.util.CredentialsLoader;
@@ -20,8 +21,9 @@ public class JCloudsTest {
 
     private static final int TEST_TIMES = 10;
 
-    private static final String PROVIDER_AZURE = "azureblob";
-    private static final String PROVIDER_AWS = "aws-s3";
+    private static final String PROVIDER_AZURE_BLOB = "azureblob";
+    private static final String PROVIDER_AWS_S3 = "aws-s3";
+    private static final String PROVIDER_AWS_SQS = "aws-sqs";
 
     private static String IDENTITY_AZURE;
     private static String CREDENTIAL_AZURE;
@@ -47,13 +49,13 @@ public class JCloudsTest {
         CONTAINER_NAME_AWS = props.get("CONTAINER_NAME_AWS");
         REGION_AWS = props.get("REGION_AWS");
 
-        awsFactory = new JCloudServiceManagerFactory(new Authentication(IDENTITY_AWS, CREDENTIAL_AWS, PROVIDER_AWS), REGION_AWS);
+        awsFactory = new JCloudsServiceManagerFactory(new Authentication(IDENTITY_AWS, CREDENTIAL_AWS, PROVIDER_AWS_S3, PROVIDER_AWS_SQS), REGION_AWS);
 
         IDENTITY_AZURE = props.get("IDENTITY_AZURE");
         CREDENTIAL_AZURE = props.get("CREDENTIAL_AZURE");
         CONTAINER_NAME_AZURE = props.get("CONTAINER_NAME_AZURE");
 
-        azureFactory = new JCloudServiceManagerFactory(new Authentication(IDENTITY_AZURE, CREDENTIAL_AZURE, PROVIDER_AZURE), "");
+        azureFactory = new JCloudsServiceManagerFactory(new Authentication(IDENTITY_AZURE, CREDENTIAL_AZURE, PROVIDER_AZURE_BLOB, null), "");
     }
 
     @Test
@@ -68,6 +70,18 @@ public class JCloudsTest {
         StorageTestHandler.uploadTest(awsFactory, CONTAINER_NAME_AWS, TEST_TIMES);
         StorageTestHandler.downloadTest(awsFactory, CONTAINER_NAME_AWS, TEST_TIMES);
         StorageTestHandler.listTest(awsFactory, CONTAINER_NAME_AWS, TEST_TIMES);
+    }
+
+    @Test
+    public void awsQueueTest() throws IOException {
+        int count = 10;
+        QueueTestHandler.createQueue(awsFactory, count);
+        QueueTestHandler.retrieveQueue(awsFactory, count);
+        QueueTestHandler.addMessage(awsFactory, count);
+        QueueTestHandler.peekMessage(awsFactory, count);
+        QueueTestHandler.retrieveMessage(awsFactory, count);
+        QueueTestHandler.deleteMessage(awsFactory, count);
+        QueueTestHandler.deleteQueue(awsFactory, count);
     }
 
 }

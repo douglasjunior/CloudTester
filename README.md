@@ -13,9 +13,22 @@ Biblioteca de teste e comparação entre APIs de acesso a nuvem.
  
 ## Funções implementadas
 - Armazenamento de arquivos (Blob)
- - Download
- - Upload
- - Listagem
+  - Download
+  - Upload
+  - Listagem
+- Fila de Mensagens (SQS) *(JClouds ainda não implementa Azure)*
+  - Fila
+    - Criar
+    - Recuperar
+    - Listar
+    - Limpar (JClouds não implementa)
+    - Apagar (JClouds apresentou problema [JCLOUDS-1116](https://issues.apache.org/jira/browse/JCLOUDS-1116))
+  - Mensagem
+    - Enviar
+    - Recuperar
+    - Inspecionar
+    - Listar
+    - Apagar
 
 ## Instruções de uso
 1. Crie um arquivo chamado `credentials.properties` na raiz do projeto para armazenar os atributos de autenticação.
@@ -31,8 +44,10 @@ Biblioteca de teste e comparação entre APIs de acesso a nuvem.
  IDENTITY_AWS = ETOEJY4S8VB2AUG5L84B #[Access Key ID criada na seção de Security Credentials]
  CREDENTIAL_AWS = 8+NeuyABHDop7WuIjP1Xs6+7mRZOhauIJgom2vWz #[Secret Access Key criada na seção de Security Credentials]
  CONTAINER_NAME_AWS = cloudtester-utfpr #[nome do Bucket criado no S3]
+ REGION_AWS = sa-east-1 #[especifica a região a trabalhar, requerido para SQS]
  ```
- *Obs: Substitua os valores de exemplo pelos valores de suas credenciais. Não compartilhe suas credenciais com terceiros.*
+ *Obs: Substitua os valores de exemplo pelos valores de suas credenciais. Não compartilhe suas credenciais com terceiros.*<br>
+ *Obs²: Azure não precisa especificar região, pois a mesma já está amarrada ao Container.*
 2. Para testar Download e Upload é preciso criar os 10 arquivos a serem enviados, também na raiz do projeto.
 
  Exemplo:

@@ -8,29 +8,32 @@ import br.edu.utfpr.cp.cloudtester.tool.VMManager;
 import org.jclouds.ContextBuilder;
 import org.jclouds.blobstore.BlobStoreContext;
 import br.edu.utfpr.cp.cloudtester.tool.StorageManager;
-import org.jclouds.aws.domain.Region;
+import org.jclouds.sqs.SQSApi;
 
 /**
  *
  * @author Douglas
  */
-public class JCloudServiceManagerFactory extends ServiceManagerFactory {
+public class JCloudsServiceManagerFactory extends ServiceManagerFactory {
 
-    public JCloudServiceManagerFactory(Authentication authentication, String region) {
+    public JCloudsServiceManagerFactory(Authentication authentication, String region) {
         super(authentication, region);
     }
 
     @Override
     public StorageManager createStorageManager() {
-        BlobStoreContext context = ContextBuilder.newBuilder(authentication.getProvider())
+        BlobStoreContext context = ContextBuilder.newBuilder(authentication.getStorageProvider())
                 .credentials(authentication.getIdentity(), authentication.getCredential())
                 .buildView(BlobStoreContext.class);
-        return new JCloudStorageManager(context);
+        return new JCloudsStorageManager(context);
     }
 
     @Override
     public QueueManager createQueueManager() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        SQSApi sqsApi = ContextBuilder.newBuilder(authentication.getQueueProvider())
+                .credentials(authentication.getIdentity(), authentication.getCredential())
+                .buildApi(SQSApi.class);
+        return new JCloudsQueueManager(sqsApi, region);
     }
 
     @Override
@@ -45,6 +48,6 @@ public class JCloudServiceManagerFactory extends ServiceManagerFactory {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + " with provider " + authentication.getProvider();
+        return getClass().getSimpleName() + " with provider " + authentication.getStorageProvider() + ", " + authentication.getQueueProvider();
     }
 }

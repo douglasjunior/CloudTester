@@ -1,7 +1,7 @@
 package br.edu.utfpr.cp.cloudtester.comparation;
 
 import br.edu.utfpr.cp.cloudtester.azure.AzureServiceManagerFactory;
-import br.edu.utfpr.cp.cloudtester.jclouds.JCloudServiceManagerFactory;
+import br.edu.utfpr.cp.cloudtester.jclouds.JCloudsServiceManagerFactory;
 import br.edu.utfpr.cp.cloudtester.tool.ServiceManagerFactory;
 import br.edu.utfpr.cp.cloudtester.handler.StorageTestHandler;
 import br.edu.utfpr.cp.cloudtester.tool.Authentication;
@@ -37,7 +37,7 @@ public class JCloudAzureComparationTest {
         CONTAINER_NAME_AZURE = props.get("CONTAINER_NAME_AZURE");
 
         azureFactory = new AzureServiceManagerFactory(new Authentication(IDENTITY_AZURE, CREDENTIAL_AZURE), "");
-        jcloudFactory = new JCloudServiceManagerFactory(new Authentication(IDENTITY_AZURE, CREDENTIAL_AZURE, PROVIDER_AZURE), "");
+        jcloudFactory = new JCloudsServiceManagerFactory(new Authentication(IDENTITY_AZURE, CREDENTIAL_AZURE, PROVIDER_AZURE, null), "");
     }
 
     @Test

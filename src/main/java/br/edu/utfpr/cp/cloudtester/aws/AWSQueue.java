@@ -7,6 +7,7 @@ import com.amazonaws.services.sqs.model.GetQueueAttributesRequest;
 import com.amazonaws.services.sqs.model.GetQueueAttributesResult;
 import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.PurgeQueueRequest;
+import com.amazonaws.services.sqs.model.QueueDoesNotExistException;
 import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,11 @@ public class AWSQueue implements Queue {
         this.sqsClient = sqsClient;
         this.url = url;
         this.name = name;
+        try {
+            checkUrl();
+        } catch (QueueDoesNotExistException ex) {
+            System.err.println(ex.toString());
+        }
     }
 
     @Override

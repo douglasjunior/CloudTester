@@ -10,12 +10,12 @@ import org.jclouds.blobstore.domain.StorageMetadata;
  *
  * @author Douglas
  */
-public class JCloudResourceMetadata implements ResourceMetadata {
+public class JCloudsResourceMetadata implements ResourceMetadata {
 
     private final StorageMetadata storageMetadata;
     private final String containerName;
 
-    JCloudResourceMetadata(StorageMetadata storageMetadata, String containerName) {
+    JCloudsResourceMetadata(StorageMetadata storageMetadata, String containerName) {
         this.storageMetadata = storageMetadata;
         this.containerName = containerName;
     }
@@ -68,7 +68,7 @@ public class JCloudResourceMetadata implements ResourceMetadata {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final JCloudResourceMetadata other = (JCloudResourceMetadata) obj;
+        final JCloudsResourceMetadata other = (JCloudsResourceMetadata) obj;
         if (!Objects.equals(this.storageMetadata, other.storageMetadata)) {
             return false;
         }

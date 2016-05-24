@@ -23,12 +23,12 @@ import br.edu.utfpr.cp.cloudtester.tool.StorageManager;
  *
  * @author Douglas
  */
-public class JCloudStorageManager implements StorageManager {
+public class JCloudsStorageManager implements StorageManager {
 
     private final BlobStoreContext context;
     private final BlobStore blobStore;
 
-    JCloudStorageManager(BlobStoreContext context) {
+    JCloudsStorageManager(BlobStoreContext context) {
         this.context = context;
         this.blobStore = context.getBlobStore();
     }
@@ -69,7 +69,7 @@ public class JCloudStorageManager implements StorageManager {
         List<ResourceMetadata> result = new ArrayList<>(page.size());
         for (Iterator<? extends StorageMetadata> iterator = page.iterator(); iterator.hasNext();) {
             StorageMetadata metaData = iterator.next();
-            ResourceMetadata resourceMetadata = new JCloudResourceMetadata(metaData, containerName);
+            ResourceMetadata resourceMetadata = new JCloudsResourceMetadata(metaData, containerName);
             result.add(resourceMetadata);
         }
         return result;
@@ -83,7 +83,7 @@ public class JCloudStorageManager implements StorageManager {
     @Override
     public ResourceMetadata getResourceMetadata(String name, String containerName) {
         BlobMetadata blobMetadata = blobStore.blobMetadata(containerName, name);
-        return new JCloudResourceMetadata(blobMetadata, containerName);
+        return new JCloudsResourceMetadata(blobMetadata, containerName);
     }
 
 }
