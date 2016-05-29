@@ -1,8 +1,8 @@
 package br.edu.utfpr.cp.cloudtester.util;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -26,7 +26,7 @@ public class CredentialsLoader {
     }
 
     private static void loadCredentials() throws FileNotFoundException, IOException {
-        try (FileInputStream fis = new FileInputStream(FILE_NAME)) {
+        try (InputStream fis = CredentialsLoader.class.getClassLoader().getResourceAsStream(FILE_NAME)) {
             Properties props = new Properties();
             props.load(fis);
             credentials = new HashMap<>();

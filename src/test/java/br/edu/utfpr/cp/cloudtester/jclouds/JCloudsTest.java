@@ -5,9 +5,12 @@ import br.edu.utfpr.cp.cloudtester.handler.StorageTestHandler;
 import br.edu.utfpr.cp.cloudtester.tool.Authentication;
 import br.edu.utfpr.cp.cloudtester.util.CredentialsLoader;
 import br.edu.utfpr.cp.cloudtester.tool.ServiceManagerFactory;
+import com.google.common.collect.ImmutableSet;
+import com.google.inject.Module;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
+import org.jclouds.logging.slf4j.config.SLF4JLoggingModule;
 import org.junit.*;
 
 /**
@@ -40,6 +43,10 @@ public class JCloudsTest {
 
     @BeforeClass
     public static void loadCredentials() throws FileNotFoundException, IOException {
+        // módulo utilizado para habilitar o Log no JClouds
+        Iterable<Module> modules = null;
+        //modules = ImmutableSet.of(new SLF4JLoggingModule());
+
         Map<String, String> props = CredentialsLoader.getCredentials();
 
         System.out.println("Credentials: " + props.toString());
@@ -49,13 +56,13 @@ public class JCloudsTest {
         CONTAINER_NAME_AWS = props.get("CONTAINER_NAME_AWS");
         REGION_AWS = props.get("REGION_AWS");
 
-        awsFactory = new JCloudsServiceManagerFactory(new Authentication(IDENTITY_AWS, CREDENTIAL_AWS, PROVIDER_AWS_S3, PROVIDER_AWS_SQS), REGION_AWS);
+        awsFactory = new JCloudsServiceManagerFactory(new Authentication(IDENTITY_AWS, CREDENTIAL_AWS, PROVIDER_AWS_S3, PROVIDER_AWS_SQS), REGION_AWS, modules);
 
         IDENTITY_AZURE = props.get("IDENTITY_AZURE");
         CREDENTIAL_AZURE = props.get("CREDENTIAL_AZURE");
         CONTAINER_NAME_AZURE = props.get("CONTAINER_NAME_AZURE");
 
-        azureFactory = new JCloudsServiceManagerFactory(new Authentication(IDENTITY_AZURE, CREDENTIAL_AZURE, PROVIDER_AZURE_BLOB, null), "");
+        azureFactory = new JCloudsServiceManagerFactory(new Authentication(IDENTITY_AZURE, CREDENTIAL_AZURE, PROVIDER_AZURE_BLOB, null), "", modules);
     }
 
     @Test

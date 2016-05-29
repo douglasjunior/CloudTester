@@ -8,6 +8,7 @@ import br.edu.utfpr.cp.cloudtester.tool.VMManager;
 import org.jclouds.ContextBuilder;
 import org.jclouds.blobstore.BlobStoreContext;
 import br.edu.utfpr.cp.cloudtester.tool.StorageManager;
+import com.google.inject.Module;
 import org.jclouds.sqs.SQSApi;
 
 /**
@@ -16,23 +17,32 @@ import org.jclouds.sqs.SQSApi;
  */
 public class JCloudsServiceManagerFactory extends ServiceManagerFactory {
 
-    public JCloudsServiceManagerFactory(Authentication authentication, String region) {
+    private final Iterable<Module> modules;
+
+    public JCloudsServiceManagerFactory(Authentication authentication, String region, Iterable<Module> modules) {
         super(authentication, region);
+        this.modules = modules;
     }
 
     @Override
     public StorageManager createStorageManager() {
-        BlobStoreContext context = ContextBuilder.newBuilder(authentication.getStorageProvider())
-                .credentials(authentication.getIdentity(), authentication.getCredential())
-                .buildView(BlobStoreContext.class);
+        ContextBuilder builder = ContextBuilder.newBuilder(authentication.getStorageProvider())
+                .credentials(authentication.getIdentity(), authentication.getCredential());
+        if (modules != null) {
+            builder.modules(modules);
+        }
+        BlobStoreContext context = builder.buildView(BlobStoreContext.class);
         return new JCloudsStorageManager(context);
     }
 
     @Override
     public QueueManager createQueueManager() {
-        SQSApi sqsApi = ContextBuilder.newBuilder(authentication.getQueueProvider())
-                .credentials(authentication.getIdentity(), authentication.getCredential())
-                .buildApi(SQSApi.class);
+        ContextBuilder builder = ContextBuilder.newBuilder(authentication.getQueueProvider())
+                .credentials(authentication.getIdentity(), authentication.getCredential());
+        if (modules != null) {
+            builder.modules(modules);
+        }
+        SQSApi sqsApi = builder.buildApi(SQSApi.class);
         return new JCloudsQueueManager(sqsApi, region);
     }
 
