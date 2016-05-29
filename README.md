@@ -31,7 +31,7 @@ Biblioteca de teste e comparação entre APIs de acesso a nuvem.
     - Apagar
 
 ## Instruções de uso
-1. Crie um arquivo chamado `credentials.properties` na raiz do projeto para armazenar os atributos de autenticação.
+1. Crie um arquivo chamado `credentials.properties` no diretório `src/main/resources/` para armazenar os atributos de autenticação.
 
  Exemplo:
  
