@@ -55,4 +55,18 @@ public class StorageTestHandler {
             }
         }
     }
+
+    public static void deleteTest(final ServiceManagerFactory factory, final String containerName, final int testTimes) throws IOException {
+        System.out.println("Testing Delete in " + factory);
+
+        try (StorageManager storeManager = factory.createStorageManager()) {
+            for (int i = 0; i < testTimes; i++) {
+                String fileName = "file" + i + ".txt";
+                long start = System.currentTimeMillis();
+                storeManager.delete(fileName, containerName);
+                long diff = System.currentTimeMillis() - start;
+                System.out.println("Deleted File " + fileName + " in " + diff + " millis");
+            }
+        }
+    }
 }

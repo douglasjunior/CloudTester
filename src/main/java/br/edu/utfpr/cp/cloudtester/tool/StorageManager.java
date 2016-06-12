@@ -14,6 +14,8 @@ public interface StorageManager extends ServiceManager {
     public Resource retrieves(ResourceMetadata metadata) throws IOException;
 
     public Resource retrieves(String name, String containerName) throws IOException;
+    
+    public void delete(String name, String containerName) throws IOException;
 
     public ResourceMetadata getResourceMetadata(String name, String containerName);
 

@@ -35,7 +35,7 @@ class AzureStorageManager implements StorageManager {
 
     @Override
     public void stores(Resource resource, String containerName) throws IOException {
-        try(InputStream is = resource.getInputStream();) {
+        try (InputStream is = resource.getInputStream();) {
             CloudBlobContainer container = getContainer(containerName);
             CloudBlockBlob blob = container.getBlockBlobReference(resource.getName());
             blob.upload(is, resource.getLength());
@@ -101,6 +101,17 @@ class AzureStorageManager implements StorageManager {
             cacheContainer.put(containerName, container);
         }
         return container;
+    }
+
+    @Override
+    public void delete(String name, String containerName) throws IOException {
+        try {
+            CloudBlobContainer container = getContainer(containerName);
+            CloudBlockBlob blob = container.getBlockBlobReference(name);
+            blob.deleteIfExists();
+        } catch (URISyntaxException | StorageException ex) {
+            throw new IOException(ex);
+        }
     }
 
 }

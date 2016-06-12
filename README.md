@@ -3,9 +3,9 @@
 Biblioteca de teste e comparação entre APIs de acesso a nuvem.
 
 ## APIs disponíveis
-- [jclouds](https://jclouds.apache.org/) 
-- [Azure Storage](https://azure.microsoft.com/pt-br/develop/java/)
-- [Amazon AWS](https://aws.amazon.com/pt/sdk-for-java/)
+- [jclouds](https://jclouds.apache.org/) 1.9.2
+- [Azure Storage](https://azure.microsoft.com/pt-br/develop/java/) 4.2.0
+- [Amazon AWS](https://aws.amazon.com/pt/sdk-for-java/) 1.11.3
 
 ## Plataformas suportadas
 - [Microsoft Azure](https://azure.microsoft.com/pt-br/)
@@ -15,7 +15,8 @@ Biblioteca de teste e comparação entre APIs de acesso a nuvem.
 - Armazenamento de arquivos (Blob)
   - Download
   - Upload
-  - Listagem
+  - Listagem (JClouds apresentou problema [JCLOUDS-548](https://issues.apache.org/jira/browse/JCLOUDS-548))
+  - Remoção
 - Fila de Mensagens (SQS) *(JClouds ainda não implementa Azure)*
   - Fila
     - Criar
@@ -48,7 +49,7 @@ Biblioteca de teste e comparação entre APIs de acesso a nuvem.
  ```
  *Obs: Substitua os valores de exemplo pelos valores de suas credenciais. Não compartilhe suas credenciais com terceiros.*<br>
  *Obs²: Azure não precisa especificar região, pois a mesma já está amarrada ao Container.*
-2. Para testar Download e Upload é preciso criar os 10 arquivos a serem enviados, também na raiz do projeto.
+2. Para testar Download e Upload é preciso criar os 10 arquivos a serem enviados na raiz do projeto. O conteúdo do arquivo fica a cargo do usuário.
 
  Exemplo:
  

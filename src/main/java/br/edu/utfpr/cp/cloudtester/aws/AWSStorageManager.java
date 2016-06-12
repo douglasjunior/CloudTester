@@ -86,4 +86,9 @@ class AWSStorageManager implements StorageManager {
 
     }
 
+    @Override
+    public void delete(String name, String containerName) throws IOException {
+        s3Client.deleteObject(containerName, name);
+    }
+
 }
