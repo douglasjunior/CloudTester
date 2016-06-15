@@ -3,10 +3,12 @@ package br.edu.utfpr.cp.cloudtester.jclouds;
 import br.edu.utfpr.cp.cloudtester.tool.Authentication;
 import br.edu.utfpr.cp.cloudtester.tool.ServiceManagerFactory;
 import br.edu.utfpr.cp.cloudtester.util.CredentialsLoader;
+import com.google.common.collect.ImmutableSet;
 import com.google.inject.Module;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
+import org.jclouds.logging.slf4j.config.SLF4JLoggingModule;
 import org.junit.BeforeClass;
 
 /**
@@ -27,8 +29,8 @@ public abstract class JCloudsTest {
     protected static String CONTAINER_NAME_AWS;
 
     // fábricas
-    protected static ServiceManagerFactory azureFactory;
-    protected static ServiceManagerFactory awsFactory;
+    protected static ServiceManagerFactory jcloudsAzureFactory;
+    protected static ServiceManagerFactory jcloudsAwsFactory;
 
     @BeforeClass
     public static void loadCredentials() throws FileNotFoundException, IOException {
@@ -47,7 +49,7 @@ public abstract class JCloudsTest {
                 PROVIDER_AWS_SQS);
         CONTAINER_NAME_AWS = props.get("CONTAINER_NAME_AWS");
 
-        awsFactory = new JCloudsServiceManagerFactory(
+        jcloudsAwsFactory = new JCloudsServiceManagerFactory(
                 awsAuth,
                 props.get("REGION_AWS"),
                 modules);
@@ -57,10 +59,9 @@ public abstract class JCloudsTest {
                 props.get("CREDENTIAL_AZURE"),
                 PROVIDER_AZURE_BLOB,
                 null);
-
         CONTAINER_NAME_AZURE = props.get("CONTAINER_NAME_AZURE");
 
-        azureFactory = new JCloudsServiceManagerFactory(
+        jcloudsAzureFactory = new JCloudsServiceManagerFactory(
                 awsAzure,
                 "",
                 modules);

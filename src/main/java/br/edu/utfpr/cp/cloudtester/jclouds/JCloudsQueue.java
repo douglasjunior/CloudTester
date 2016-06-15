@@ -41,7 +41,6 @@ public class JCloudsQueue implements Queue {
     @Override
     public void create() {
         url = queueApi.create(name);
-        delete();
         checkQueue();
     }
 

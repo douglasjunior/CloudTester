@@ -1,6 +1,5 @@
 package br.edu.utfpr.cp.cloudtester.jclouds;
 
-import br.edu.utfpr.cp.cloudtester.aws.AWSQueue;
 import br.edu.utfpr.cp.cloudtester.tool.Queue;
 import br.edu.utfpr.cp.cloudtester.tool.QueueManager;
 import java.io.IOException;
